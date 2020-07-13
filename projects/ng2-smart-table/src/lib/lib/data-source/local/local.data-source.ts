@@ -3,6 +3,9 @@ import { LocalFilter } from './local.filter';
 import { LocalPager } from './local.pager';
 import { DataSource } from '../data-source';
 import { deepExtend } from '../../helpers';
+import { Error } from 'tslint/lib/error';
+
+import * as _ from 'lodash';
 
 export class LocalDataSource extends DataSource {
 
@@ -63,7 +66,7 @@ export class LocalDataSource extends DataSource {
   }
 
   find(element: any): Promise<any> {
-    const found = this.data.find(el => el === element);
+    const found = this.data.find(el => _.isEqual(el, element));
     if (found) {
       return Promise.resolve(found);
     }

@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'basic-example-data',
   template: `
-    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
   `,
 })
-export class BasicExampleDataComponent {
+export class BasicExampleDataComponent implements OnInit {
 
   settings = {
     columns: {
@@ -24,6 +25,8 @@ export class BasicExampleDataComponent {
       },
     },
   };
+
+  public source: LocalDataSource = new LocalDataSource();
 
   data = [
     {
