@@ -4,6 +4,53 @@
 
 ng2-smart-table component made with :heart:  by [Akveo team](http://akveo.com/). Follow us on [Twitter](https://twitter.com/akveo_inc) to get latest news about this component first!
 
+### Demo
+
+<a target="_blank" href="https://akveo.github.io/ng2-smart-table/">Live Demo</a>
+
+![alt tag](src/assets/img/demo.gif)
+
+## Installation
+
+The library is available as npm package, so all you need to do is to run the following command:
+
+```
+npm install --save @vamidicreations/ng2-smart-table
+```
+
+This command will create a record in your `package.json` file and install the package into the npm modules folder.
+
+## Minimal Setup Example
+
+First thing you need to do is to import the ng2-smart-table directives into your component.
+
+```
+
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
+```
+
+Then register it by adding to the list of directives of your module:
+
+```
+// ...
+
+@NgModule({
+  imports: [
+    // ...
+    
+    Ng2SmartTableModule,
+    
+    // ...
+  ],
+  declarations: [ ... ]
+})
+// ...
+```
+
+Now, we need to configure the table and add it into the template. The only <strong>required</strong> setting for the component to start working is a columns configuration.
+Let's register <i>settings</i> property inside of the component where we want to have the table and configure some columns [Settings documentation](https://akveo.github.io/ng2-smart-table/#/documentation):
+
 Edited by Arno van den Brink and Valencio Hoffman
 
 Changes are:
@@ -44,53 +91,6 @@ Usage:
 This demo will put full name at the beginning of the table, even though ID is placed first.
 
 *Note that the index should be defined in the right sequence in order to make it work.* 
-
-### Demo
-
-<a target="_blank" href="https://akveo.github.io/ng2-smart-table/">Live Demo</a>
-
-![alt tag](src/assets/img/demo.gif)
-
-## Installation
-
-The library is available as npm package, so all you need to do is to run the following command:
-
-```
-npm install --save ng2-smart-table
-```
-
-This command will create a record in your `package.json` file and install the package into the npm modules folder.
-
-## Minimal Setup Example
-
-First thing you need to do is to import the ng2-smart-table directives into your component.
-
-```
-
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-
-```
-
-Then register it by adding to the list of directives of your module:
-
-```
-// ...
-
-@NgModule({
-  imports: [
-    // ...
-    
-    Ng2SmartTableModule,
-    
-    // ...
-  ],
-  declarations: [ ... ]
-})
-// ...
-```
-
-Now, we need to configure the table and add it into the template. The only <strong>required</strong> setting for the component to start working is a columns configuration.
-Let's register <i>settings</i> property inside of the component where we want to have the table and configure some columns [Settings documentation](https://akveo.github.io/ng2-smart-table/#/documentation):
     
 ```
 settings = {
