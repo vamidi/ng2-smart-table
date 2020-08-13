@@ -18,6 +18,11 @@ export class Grid {
 
   onSelectRowSource = new Subject<any>();
 
+  showActionColumnLeft: boolean;
+  showActionColumnRight: boolean;
+
+  public columns: Array<number> = [];
+
   constructor(source: DataSource, settings: any) {
     this.setSettings(settings);
     this.setSource(source);
@@ -49,6 +54,18 @@ export class Grid {
 
     if (this.source) {
       this.source.refresh();
+    }
+
+    this.showActionColumnLeft = this.showActionColumn('left');
+    this.showActionColumnRight = this.showActionColumn('right');
+
+    if(this.showActionColumnLeft)
+    {
+      this.regenerateColumns();
+    }
+    else if(this.showActionColumnRight)
+    {
+      this.regenerateColumns(false);
     }
   }
 
@@ -171,6 +188,18 @@ export class Grid {
     }
   }
 
+	orderChange(confirmEmitter: EventEmitter<any>)
+	{
+		const columnData = {};
+		this.getColumns().forEach((column) => columnData[column.id] = { index: column.index, title: column.title });
+
+		const deferred = new Deferred();
+		confirmEmitter.emit({
+			columns: columnData,
+			confirm: deferred,
+		});
+	}
+
   processDataChange(changes: any) {
     if (this.shouldProcessChange(changes)) {
       this.dataSet.setData(changes['elements']);
@@ -268,4 +297,17 @@ export class Grid {
     return this.dataSet.getLastRow();
   }
 
+  private regenerateColumns(isLeft: boolean = true)
+  {
+    this.columns = [];
+    if(isLeft)
+      this.columns.push(0);
+
+    this.getColumns().forEach((column) => {
+      this.columns.push(isLeft ? column.index + 1 : column.index);
+    });
+
+    if(!isLeft)
+      this.columns.push(this.columns.length);
+  }
 }

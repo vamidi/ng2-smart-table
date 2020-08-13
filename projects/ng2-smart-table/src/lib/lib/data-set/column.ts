@@ -6,6 +6,7 @@ export class Column {
   type: string = '';
   class: string = '';
   width: string = '';
+  tooltip: { enabled: boolean, text: string } = { enabled: false, text: '' };
   isSortable: boolean = false;
   isEditable: boolean = true;
   isAddable: boolean = true;
@@ -21,7 +22,7 @@ export class Column {
   filterFunction: Function;
   onComponentInitFunction: Function;
 
-  constructor(public id: string, protected settings: any, protected dataSet: DataSet) {
+  constructor(public id: string, public index: number, protected settings: any, protected dataSet: DataSet) {
     this.process();
   }
 
@@ -57,11 +58,13 @@ export class Column {
     this.title = this.settings['title'];
     this.class = this.settings['class'];
     this.width = this.settings['width'];
+    this.tooltip = this.settings['tooltip'];
     this.type = this.prepareType();
     this.editor = this.settings['editor'];
     this.filter = this.settings['filter'];
     this.renderComponent = this.settings['renderComponent'];
     this.isHidden = this.settings['hidden'];
+    this.index = this.settings['index'] ?? this.index;
 
     this.isFilterable = typeof this.settings['filter'] === 'undefined' ? true : !!this.settings['filter'];
     this.defaultSortDirection = ['asc', 'desc']

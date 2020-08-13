@@ -129,11 +129,17 @@ export class DataSet {
    * @private
    */
   createColumns(settings: any) {
+    let counter = 0;
+
+    // console.trace(settings);
     for (const id in settings) {
       if (settings.hasOwnProperty(id)) {
-        this.columns.push(new Column(id, settings[id], this));
+        this.columns.push(new Column(id, counter++, settings[id], this));
       }
     }
+
+    // sort the columns based on their index
+    this.columns.sort((a, b) => a.index - b.index);
   }
 
   /**

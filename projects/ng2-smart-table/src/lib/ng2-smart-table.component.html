@@ -5,10 +5,12 @@
                       [isAllSelected]="isAllSelected"
                       [source]="source"
                       [createConfirm]="createConfirm"
+                      [onOrderChanged]="onColumnOrderChanged"
                       (create)="create.emit($event)"
                       (selectAllRows)="onSelectAllRows($event)"
                       (sort)="sort($event)"
                       (filter)="filter($event)">
+
   </thead>
 
   <tbody ng2-st-tbody [grid]="grid"

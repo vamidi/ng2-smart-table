@@ -1,10 +1,15 @@
-# [1.6.0](https://github.com/yggg/ng2-smart-table/compare/v1.5.0...v1.6.0) (2020-03-23)
-
+# [1.7.0](https://github.com/yggg/ng2-smart-table/compare/v1.6.1...v1.7.0) (2020-03-23)
 
 ### Features
 
-* upgrade to Angular 9 ([#1140](https://github.com/yggg/ng2-smart-table/issues/1140)) ([8a4f0bb](https://github.com/yggg/ng2-smart-table/commit/8a4f0bb))
+* Able to reorder the columns in the table
 
+# [1.6.1](https://github.com/yggg/ng2-smart-table/compare/v1.5.0...v1.6.0) (2020-03-23)
+
+### Features
+
+* Upgrade to Angular 9 ([#1140](https://github.com/yggg/ng2-smart-table/issues/1140)) ([8a4f0bb](https://github.com/yggg/ng2-smart-table/commit/8a4f0bb))
+* Able to hide columns
 
 ### BREAKING CHANGES
 

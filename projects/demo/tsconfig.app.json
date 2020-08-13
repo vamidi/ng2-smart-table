@@ -6,12 +6,15 @@
       "node"
     ]
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
+  "angularCompilerOptions": {
+    "enableIvy": false
+  },
   "include": [
-    "src/**/*.d.ts",
+    "src/**/*.ts",
     "../ng2-smart-table/src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts"
   ]
 }

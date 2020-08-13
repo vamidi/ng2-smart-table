@@ -3,7 +3,6 @@ import { LocalFilter } from './local.filter';
 import { LocalPager } from './local.pager';
 import { DataSource } from '../data-source';
 import { deepExtend } from '../../helpers';
-import { Error } from 'tslint/lib/error';
 
 import * as _ from 'lodash';
 

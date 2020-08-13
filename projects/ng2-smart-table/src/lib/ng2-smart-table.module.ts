@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { CellModule } from './components/cell/cell.module';
 import { FilterModule } from './components/filter/filter.module';
 import { PagerModule } from './components/pager/pager.module';

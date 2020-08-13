@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class CustomViewEditExamplesComponent {
 
   snippets = {
-    customEditorModule: require('raw-loader!../snippets/custom-editor-module.md').default,
+    customEditorModule: require('raw-loader!../snippets/custom-editor-module.md'),
   };
 
 }

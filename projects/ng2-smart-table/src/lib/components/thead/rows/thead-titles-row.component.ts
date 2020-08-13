@@ -1,8 +1,7 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 import { Grid } from '../../../lib/grid';
 import { DataSource } from '../../../lib/data-source/data-source';
-import { Column } from "../../../lib/data-set/column";
 
 @Component({
   selector: '[ng2-st-thead-titles-row]',
@@ -13,12 +12,12 @@ import { Column } from "../../../lib/data-set/column";
                                    [isAllSelected]="isAllSelected"
                                    (click)="selectAllRows.emit($event)">
     </th>
-    <th ng2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid"></th>
-    <th *ngFor="let column of grid.getColumns()" class="ng2-smart-th {{ column.id }}" [ngClass]="column.class"
+    <th class="nonDraggable" ng2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid"></th>
+    <th *ngFor="let column of grid.getColumns(); let i = index" class="ng2-smart-th {{ column.id }}" [ngClass]="column.class"
       [style.width]="column.width" [ngStyle]="{'display': column.isHidden ? 'none': ''}">
       <ng2-st-column-title [source]="source" [column]="column" (sort)="sort.emit($event)"></ng2-st-column-title>
     </th>
-    <th ng2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid"></th>
+    <th class="nonDraggable" ng2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid"></th>
   `,
 })
 export class TheadTitlesRowComponent implements OnChanges {
@@ -26,6 +25,7 @@ export class TheadTitlesRowComponent implements OnChanges {
   @Input() grid: Grid;
   @Input() isAllSelected: boolean;
   @Input() source: DataSource;
+	@Input() onOrderChanged: EventEmitter<any>;
 
   @Output() sort = new EventEmitter<any>();
   @Output() selectAllRows = new EventEmitter<any>();
@@ -34,11 +34,9 @@ export class TheadTitlesRowComponent implements OnChanges {
   showActionColumnLeft: boolean;
   showActionColumnRight: boolean;
 
-
   ngOnChanges() {
     this.isMultiSelectVisible = this.grid.isMultiSelectVisible();
     this.showActionColumnLeft = this.grid.showActionColumn('left');
     this.showActionColumnRight = this.grid.showActionColumn('right');
   }
-
 }

@@ -32,6 +32,7 @@ export class TheadFormRowComponent implements OnChanges {
   @Input() createConfirm: EventEmitter<any>;
 
   @Output() create = new EventEmitter<any>();
+	@Output() onOrderChanged = new EventEmitter<any>();
 
   isMultiSelectVisible: boolean;
   showActionColumnLeft: boolean;
