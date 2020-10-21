@@ -1,8 +1,8 @@
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 
-import { Deferred, getDeepFromObject } from './helpers';
+import { Deferred, getDeepFromObject, getPageForRowIndex } from './helpers';
 import { Column } from './data-set/column';
 import { Row } from './data-set/row';
 import { DataSet } from './data-set/data-set';
@@ -17,9 +17,13 @@ export class Grid {
   dataSet: DataSet;
 
   onSelectRowSource = new Subject<any>();
+	onDeselectRowSource = new Subject<any>();
 
   showActionColumnLeft: boolean;
   showActionColumnRight: boolean;
+
+	private sourceOnChangedSubscription: Subscription;
+	private sourceOnUpdatedSubscription: Subscription;
 
   public columns: Array<number> = [];
 
@@ -27,6 +31,15 @@ export class Grid {
     this.setSettings(settings);
     this.setSource(source);
   }
+
+	detach(): void {
+		if (this.sourceOnChangedSubscription) {
+			this.sourceOnChangedSubscription.unsubscribe();
+		}
+		if (this.sourceOnUpdatedSubscription) {
+			this.sourceOnUpdatedSubscription.unsubscribe();
+		}
+	}
 
   showActionColumn(position: string): boolean {
     return this.isCurrentActionsPosition(position) && this.isActionsVisible();
@@ -75,10 +88,11 @@ export class Grid {
 
   setSource(source: DataSource) {
     this.source = this.prepareSource(source);
+		this.detach();
 
-    this.source.onChanged().subscribe((changes: any) => this.processDataChange(changes));
+		this.sourceOnChangedSubscription = this.source.onChanged().subscribe((changes: any) => this.processDataChange(changes));
 
-    this.source.onUpdated().subscribe((data: any) => {
+		this.sourceOnUpdatedSubscription = this.source.onUpdated().subscribe((data: any) => {
       const changedRow = this.dataSet.findRowByData(data);
       changedRow.setData(data);
     });
@@ -107,6 +121,10 @@ export class Grid {
   onSelectRow(): Observable<any> {
     return this.onSelectRowSource.asObservable();
   }
+
+	onDeselectRow(): Observable<any> {
+		return this.onDeselectRowSource.asObservable();
+	}
 
   edit(row: Row) {
     row.isInEditing = true;
@@ -208,7 +226,9 @@ export class Grid {
 
         if (row) {
           this.onSelectRowSource.next(row);
-        }
+        } else {
+					this.onDeselectRowSource.next(null);
+				}
       }
     }
   }
@@ -227,7 +247,7 @@ export class Grid {
   determineRowToSelect(changes: any): Row {
 
     if (['load', 'page', 'filter', 'sort', 'refresh'].indexOf(changes['action']) !== -1) {
-      return this.dataSet.select();
+			return this.dataSet.select(this.getRowIndexToSelect());
     }
     if (changes['action'] === 'remove') {
       if (changes['elements'].length === 0) {
@@ -260,7 +280,7 @@ export class Grid {
       source.setSort([initialSource], false);
     }
     if (this.getSetting('pager.display') === true) {
-      source.setPaging(1, this.getSetting('pager.perPage'), false);
+			source.setPaging(this.getPageToSelect(source), this.getSetting('pager.perPage'), false);
     }
 
     source.refresh();
@@ -297,7 +317,48 @@ export class Grid {
     return this.dataSet.getLastRow();
   }
 
-  private regenerateColumns(isLeft: boolean = true)
+	private getSelectionInfo(): { perPage: number, page: number, selectedRowIndex: number, switchPageToSelectedRowPage: boolean } {
+		const switchPageToSelectedRowPage: boolean = this.getSetting('switchPageToSelectedRowPage');
+		const selectedRowIndex: number = Number(this.getSetting('selectedRowIndex', 0)) || 0;
+		const { perPage, page }: { perPage: number, page: number } = this.getSetting('pager');
+		return { perPage, page, selectedRowIndex, switchPageToSelectedRowPage };
+	}
+
+	private getRowIndexToSelect(): number {
+		const { switchPageToSelectedRowPage, selectedRowIndex, perPage } = this.getSelectionInfo();
+		const dataAmount: number = this.source.count();
+		/**
+		 * source - contains all table data
+		 * dataSet - contains data for current page
+		 * selectedRowIndex - contains index for data in all data
+		 *
+		 * because of that, we need to count index for a specific row in page
+		 * if
+		 * `switchPageToSelectedRowPage` - we need to change page automatically
+		 * `selectedRowIndex < dataAmount && selectedRowIndex >= 0` - index points to existing data
+		 * (if index points to non-existing data and we calculate index for current page - we will get wrong selected row.
+		 *  if we return index witch not points to existing data - no line will be highlighted)
+		 */
+		return (
+			switchPageToSelectedRowPage &&
+			selectedRowIndex < dataAmount &&
+			selectedRowIndex >= 0
+		) ?
+			selectedRowIndex % perPage :
+			selectedRowIndex;
+	}
+
+	private getPageToSelect(source: DataSource): number {
+		const { switchPageToSelectedRowPage, selectedRowIndex, perPage, page } = this.getSelectionInfo();
+		let pageToSelect: number = Math.max(1, page);
+		if (switchPageToSelectedRowPage && selectedRowIndex >= 0) {
+			pageToSelect = getPageForRowIndex(selectedRowIndex, perPage);
+		}
+		const maxPageAmount: number = Math.ceil(source.count() / perPage);
+		return maxPageAmount ? Math.min(pageToSelect, maxPageAmount) : pageToSelect;
+	}
+
+	private regenerateColumns(isLeft: boolean = true)
   {
     this.columns = [];
     if(isLeft)
