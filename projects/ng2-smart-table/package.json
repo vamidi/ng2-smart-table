@@ -1,6 +1,6 @@
 {
   "name": "@vamidicreations/ng2-smart-table",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "Angular Smart Table",
   "author": "Valencio Hoffman <valencio.hoffman@gmail.com>",
   "license": "MIT",
@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "lodash": "^4.17.10",
+	  "tslib": "^2.0.0",
     "ng2-dragula": "^2.1.1"
   },
   "peerDependencies": {
     "ng2-completer": "^9.0.1",
-    "@angular/common": "^8.0.1",
-    "@angular/core": "^8.0.1",
-    "@angular/forms": "^8.0.1"
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
+	  "@angular/forms": "^10.0.0"
   }
 }
