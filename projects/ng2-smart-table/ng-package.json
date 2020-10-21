@@ -6,6 +6,10 @@
     "ng2-dragula"
   ],
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+	  "umdModuleIds": {
+			"ng2-completer": "ng2-completer",
+			"ng2-dragula": "ng2-dragula"
+	  }
   }
 }
