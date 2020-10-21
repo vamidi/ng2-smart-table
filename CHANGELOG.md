@@ -1,4 +1,12 @@
-# [1.8.0](https://github.com/vamidi/ng2-smart-table/compare/v1.6.0...v1.8.0) (2020-10-21)
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.1) (2020-10-21)
+
+
+### Bug Fixes
+
+* **build:** compile to es2019 ([af36fc4](https://github.com/vamidi/ng2-smart-table/commit/af36fc42412a1e906e7155bcacca74143974dc68))
+
+# [1.8.0](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.0) (2020-10-21)
 
 ### Code Refactoring
 
