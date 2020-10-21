@@ -14,7 +14,7 @@ ng2-smart-table component made with :heart:  by [Akveo team](http://akveo.com/).
 
 The library is available as npm package, so all you need to do is to run the following command:
 
-```
+```sh
 npm install --save @vamidicreations/ng2-smart-table
 ```
 
@@ -26,7 +26,7 @@ First thing you need to do is to import the ng2-smart-table directives into your
 
 ```
 
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { Ng2SmartTableModule } from '@vamidicreations/ng2-smart-table';
 
 ```
 
