@@ -13,7 +13,7 @@
     "ng2-dragula": "^2.1.1"
   },
   "peerDependencies": {
-    "ng2-completer": "^3.0.2",
+    "ng2-completer": "^9.0.1",
     "@angular/common": "^8.0.1",
     "@angular/core": "^8.0.1",
     "@angular/forms": "^8.0.1"
