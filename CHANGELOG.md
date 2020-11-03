@@ -1,3 +1,14 @@
+## [1.8.3](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.3) (2020-11-03)
+
+### Features
+
+* add hide column configuration property ([#1151](https://github.com/yggg/ng2-smart-table/issues/1151)) ([0d43219](https://github.com/yggg/ng2-smart-table/commit/0d43219))
+
+### BREAKING CHANGES
+`@akveo/ng2-smart-table` has added the ability to hide columns. Therefore, the old implementation is removed.
+See [documentations](https://akveo.github.io/ng2-smart-table/#/documentation) for the latest changes.
+
+
 <a name="1.8.2"></a>
 ## [1.8.2](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.2) (2020-11-03)
 

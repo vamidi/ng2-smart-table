@@ -55,7 +55,7 @@ Edited by Arno van den Brink and Valencio Hoffman
 
 Changes are:
 - Option to re-oder columns from the table
-- Option to hide a column from the table
+- Option to add tooltip to a column from the table
 You will still get the columns value when retrieving the row
 
 Usage:
@@ -64,7 +64,7 @@ Usage:
     columns: {
       id: {
         title: 'ID',
-        hidden: true
+        hide: true // new @akveo/ng2-smart-table method
       }
   }
 ```
@@ -91,6 +91,26 @@ Usage:
 This demo will put full name at the beginning of the table, even though ID is placed first.
 
 *Note that the index should be defined in the right sequence in order to make it work.* 
+
+### Demo tooltip
+
+Usage:
+```js
+  settings = {
+    columns: {
+      id: {
+        title: 'ID',
+        tooltip: { enabled: true, text: 'This is a tooltip of column ID' },
+      },
+      fullname:
+      {
+      	title: 'Full Name',
+      }
+    }
+  }
+```
+
+## Minimal example
     
 ```
 settings = {
