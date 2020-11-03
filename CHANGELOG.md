@@ -1,6 +1,22 @@
+<a name="1.8.2"></a>
+## [1.8.2](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.2) (2020-11-03)
+
+### Code Refactoring
+
+* use `@vamidicreations/ng2-completer` package ([#456](https://github.com/oferh/ng2-completer/issues/456))
+
+### BREAKING CHANGES
+
+`ng2-completer` dependency replaced by `@vamidicreations/ng2-completer` as original package failed to compile on angular 10. 
+ Please, uninstall `ng2-completer` and install `@vamidicreations/ng2-completer`:
+
+```sh
+npm uninstall --save ng2-completer
+npm install --save @vamidicreations/ng2-completer
+```
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://github.com/vamidi/ng2-smart-table/compare/v1.6.1...v1.8.1) (2020-10-21)
-
 
 ### Bug Fixes
 

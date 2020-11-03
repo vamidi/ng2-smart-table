@@ -1,6 +1,6 @@
 {
   "name": "ng2-smart-table",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,7 +27,7 @@
     "@angular/router": "~10.1.5",
     "highlight.js": "^9.15.8",
     "lodash": "^4.17.10",
-    "ng2-completer": "^9.0.1",
+    "@vamidicreations/ng2-completer": "^10.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
