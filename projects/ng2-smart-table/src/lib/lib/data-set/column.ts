@@ -6,12 +6,12 @@ export class Column {
   type: string = '';
   class: string = '';
   width: string = '';
-  tooltip: { enabled: boolean, text: string } = { enabled: false, text: '' };
+	hide: boolean = false;
+	tooltip: { enabled: boolean, text: string } = { enabled: false, text: '' };
   isSortable: boolean = false;
   isEditable: boolean = true;
   isAddable: boolean = true;
   isFilterable: boolean = false;
-  isHidden: boolean = false;
   sortDirection: string = '';
   defaultSortDirection: string = '';
   editor: { type: string, config: any, component: any } = { type: '', config: {}, component: null };
@@ -58,12 +58,12 @@ export class Column {
     this.title = this.settings['title'];
     this.class = this.settings['class'];
     this.width = this.settings['width'];
-    this.tooltip = this.settings['tooltip'];
+		this.hide = !!this.settings['hide'];
+		this.tooltip = this.settings['tooltip'];
     this.type = this.prepareType();
     this.editor = this.settings['editor'];
     this.filter = this.settings['filter'];
     this.renderComponent = this.settings['renderComponent'];
-    this.isHidden = this.settings['hidden'];
     this.index = this.settings['index'] ?? this.index;
 
     this.isFilterable = typeof this.settings['filter'] === 'undefined' ? true : !!this.settings['filter'];
