@@ -14,7 +14,7 @@
     "ng2-dragula": "^2.1.1"
   },
   "peerDependencies": {
-    "@vamidicreations/ng2-completer": "^10.0.0",
+    "ng2-completer": "^9.0.1",
     "@angular/common": "^10.0.0",
     "@angular/core": "^10.0.0",
     "@angular/forms": "^10.0.0"
